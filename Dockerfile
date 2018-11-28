@@ -14,13 +14,14 @@ RUN apt install -y make gcc libcap-dev libseccomp-dev &&\
 
 ### sioworkers
 
-RUN DEBIAN_FRONTEND=noninteractive apt install -y python-setuptools python-bsddb3 python-progressbar python-requests python-six python-simplejson python-celery python-twisted python-sortedcontainers python-pytest python-pytest-runner python-pytest-timeout python-enum34 python-poster python-virtualenv libpython2.7-dev libdb-dev
+RUN DEBIAN_FRONTEND=noninteractive apt install -y python-setuptools python-bsddb3 python-progressbar python-requests python-six python-simplejson python-celery python-twisted python-sortedcontainers python-pytest python-pytest-runner python-pytest-timeout python-enum34 python-poster python-virtualenv libpython2.7-dev libdb-dev gcc g++
 
 USER sio2
 RUN git clone https://github.com/xneby/sioworkers.git /home/sio2/sioworkers &&\
   python -m virtualenv /home/sio2/venv &&\
   . /home/sio2/venv/bin/activate &&\
   cd /home/sio2/sioworkers &&\
+  git checkout docker &&\
   python setup.py install
 
 ### katalog supervisord

@@ -16,6 +16,11 @@ RUN apt install -y make gcc libcap-dev libseccomp-dev &&\
 
 RUN DEBIAN_FRONTEND=noninteractive apt install -y python-setuptools python-bsddb3 python-progressbar python-requests python-six python-simplejson python-celery python-twisted python-sortedcontainers python-pytest python-pytest-runner python-pytest-timeout python-enum34 python-poster python-virtualenv libpython2.7-dev libdb-dev gcc g++
 
+# for legacy 32-bit bins
+RUN dpkg --add-architecture i386 &&\
+  apt-get update &&\
+  apt install -y gcc-multilib libstdc++5 libstdc++5:i386
+
 USER sio2
 RUN git clone https://github.com/xneby/sioworkers.git /home/sio2/sioworkers &&\
   python -m virtualenv /home/sio2/venv &&\

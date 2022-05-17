@@ -1,4 +1,4 @@
-FROM debian:stable
+FROM debian:buster
 RUN apt update &&\
   apt install -y git bash supervisor wget &&\
   useradd -s /bin/bash -m sio2
